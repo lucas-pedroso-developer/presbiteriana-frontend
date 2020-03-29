@@ -5,14 +5,14 @@ export default props => {
 
 		let isPresbyterString = user.isPresbyter === true ? `Sim`: `Não`;
 		let isLeaderString = user.isLeader === true ? `Sim`: `Não`;
-		var date = new Date(user.birthday);		                        
+		var date = user.birthday != null ? new Date(user.birthday).toLocaleDateString() : '';
 
 		return (
 			<tr key={user.id}>
 				<td>{user.name}</td>										
 				<td>{user.phone}</td>
 				<td>{user.cellphone}</td>
-				<td>{date.toLocaleDateString()}</td>
+				<td>{date}</td>
 				<td>{isPresbyterString}</td>
 				<td>{isLeaderString}</td>
 				<td>					

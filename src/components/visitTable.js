@@ -1,13 +1,13 @@
 import React from 'react'
 
 export default props => {		
-	const rows = props.visits.map( visit => {
-        var date = new Date(visit.visitDate);		                        
+	const rows = props.visits.map( visit => {        
+        var date = visit.visitDate != null ? new Date(visit.visitDate).toLocaleDateString() : '';		                        
 		return (
 			<tr key={visit.id}>
 				<td>{visit.presbyterName}</td>
 				<td>{visit.leaderName}</td>
-				<td>{date.toLocaleDateString()}</td>		                
+				<td>{date}</td>		                
 				<td>					
 					<button type="button" className="btn btn-primary" title="Editar"
 							onClick={e => props.editarAction(visit.id)}>

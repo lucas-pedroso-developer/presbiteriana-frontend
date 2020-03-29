@@ -42,7 +42,8 @@ class SearchUser extends React.Component {
 		this.getPresbyters();
 	}
 
-	search = () => {		
+	search = () => {	
+		console.log('search')	
 		const userFilter = {			
 			name: this.state.name,
 			email: this.state.email,
@@ -58,13 +59,13 @@ class SearchUser extends React.Component {
 		this.service
 				.consult(userFilter)
 				.then(response => {
-					const list = response.data					
+					const list = response.data														
 					if(list.length < 1) {
 						messages.mensagemAlert("Nenhum resultado encontrado.")
 					} 
 					this.setState({users: list})
 				}).catch(error => {
-
+					messages.mensagemErro(error.data)					
 				})
 	}
 
@@ -88,7 +89,7 @@ class SearchUser extends React.Component {
                         messages.mensagemAlert("Nenhum resultado encontrado.")
                     }                    
                 }).catch(error => {
-
+					messages.mensagemErro(error.data)					
                 })        
     }
 
@@ -112,7 +113,7 @@ class SearchUser extends React.Component {
                         messages.mensagemAlert("Nenhum resultado encontrado.")
                     }                    
                 }).catch(error => {
-
+					messages.mensagemErro(error.data)					
                 })        
     }
 
@@ -269,7 +270,7 @@ class SearchUser extends React.Component {
 							</div>
 							<div className="col-lg-3">													
 								<FormGroup  label="Data Nasc.:" htmlFor="dateMask">
-									<InputMask id="dateMask" value={this.state.birthday} mask="99/99/9999" placeholder="__/__/____" onChange={e => 
+									<InputMask id="dateMask" value={this.state.birthday} mask="99/99/9999" defaultValue="" placeholder="__/__/____" onChange={e => 
 										this.setState({birthday: e.target.value, birthdayConverted: e.target.value.split("/").reverse().join("-")})
 									} className="form-control" />		
 								</FormGroup>												

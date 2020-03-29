@@ -50,11 +50,14 @@ class SearchVisit extends React.Component {
 			idPresbyter: this.state.idPresbyter,
 			visitDate: this.state.visitDateConverted		
         }		
+        console.log('visitFilter')
         console.log(visitFilter)
 		this.service
 				.consult(visitFilter)
 				.then(response => {
-					const list = response.data
+                    const list = response.data
+                    console.log('list')
+                    console.log(list)
 					if(list.length < 1) {
 						messages.mensagemAlert("Nenhum resultado encontrado.")
 					} 
