@@ -2,7 +2,7 @@ import React from 'react'
 
 export default props => {		
 	const rows = props.visits.map( visit => {        
-        var date = visit.visitDate != null ? new Date(visit.visitDate).toLocaleDateString() : '';		                        
+        var date = visit.visitDate != null ? new Date(visit.visitDate).toLocaleDateString() : '';	 	                        
 		return (
 			<tr key={visit.id}>
 				<td>{visit.presbyterName}</td>

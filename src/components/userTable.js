@@ -5,7 +5,7 @@ export default props => {
 
 		let isPresbyterString = user.isPresbyter === true ? `Sim`: `Não`;
 		let isLeaderString = user.isLeader === true ? `Sim`: `Não`;
-		var date = user.birthday != null ? new Date(user.birthday).toLocaleDateString() : '';
+		var date = user.birthday != null ? new Date(user.birthday).toLocaleDateString() : '';   
 
 		return (
 			<tr key={user.id}>
