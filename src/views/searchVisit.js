@@ -24,8 +24,7 @@ class SearchVisit extends React.Component {
         presbyters: [],
         leaders: [],
         visits: [],			    
-        visitDelete: [],
-        visitDateConverted: '',
+        visitDelete: [],        
 		mensagemErro: null,
 		updating: false,		
 		showConfirmDialog: false,
@@ -49,15 +48,11 @@ class SearchVisit extends React.Component {
 			idLeader: this.state.idLeader,
 			idPresbyter: this.state.idPresbyter,
 			visitDate: this.state.visitDateConverted		
-        }		
-        console.log('visitFilter')
-        console.log(visitFilter)
+        }		        
 		this.service
 				.consult(visitFilter)
 				.then(response => {
-                    const list = response.data
-                    console.log('list')
-                    console.log(list)
+                    const list = response.data                    
 					if(list.length < 1) {
 						messages.mensagemAlert("Nenhum resultado encontrado.")
 					} 
@@ -161,7 +156,7 @@ class SearchVisit extends React.Component {
         const data = this.state.visits.map(visit=> [
             visit.leaderName, 
             visit.presbyterName,
-			visit.visitDate.toString().split(",").reverse().join("/")			
+			visit.visitDate
         ]);
     
         let content = {
@@ -243,7 +238,7 @@ class SearchVisit extends React.Component {
                             <div className="col-lg-3" style={ {position : 'relative', left: '0px'} }>
                                 <FormGroup  label="Data Visita:" htmlFor="dateMask">
                                     <InputMask id="dateMask" value={this.state.visitDate} mask="99/99/9999" placeholder="__/__/____" onChange={e => 
-                                        this.setState({visitDate: e.target.value, visitDateConverted: e.target.value.split("/").reverse().join("-")})
+                                        this.setState({visitDate: e.target.value})
                                     } className="form-control" />		
                                 </FormGroup>												
                             </div> 							

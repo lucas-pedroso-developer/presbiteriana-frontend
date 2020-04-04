@@ -14,8 +14,7 @@ class RegisterUser extends React.Component {
 		email: '',	
 		address: '',
 		age: '',
-		birthday: '',
-		birthdayConverted: '',
+		birthday: '',		
 		phone: '',
 		cellphone: '',
 		idLeader: '',	
@@ -34,21 +33,17 @@ class RegisterUser extends React.Component {
 	}
 
 	componentDidMount() {				
-		const params = this.props.match.params
-		console.log('params')		
-		console.log(params)		
+		const params = this.props.match.params		
 		this.getLeaders();
 		this.getPresbyters();
 		if(params.id) {		
-			console.log('params.id')
-			console.log(params.id)				
+			
 			this.service
 				.getUserById(params.id)
 				.then(response => {								
 					this.setState({...response.data, updating: true})					
 				}).catch(error => {								
-					//messages.mensagemErro(error.response)
-					console.log(error)
+					//messages.mensagemErro(error.response)					
 				})
 		}
 	}
@@ -61,10 +56,10 @@ class RegisterUser extends React.Component {
 			});
 			return false;
 		}	
-		
-		const {	name, email, address, age, birthdayConverted, phone, cellphone, isPresbyter, isLeader, idLeader, idPresbyter } = this.state
-		const user = {	name, email, address, age, birthdayConverted, phone, cellphone, isPresbyter, isLeader, idLeader, idPresbyter }
-			
+						
+		const {	name, email, address, age, birthday, phone, cellphone, isPresbyter, isLeader, idLeader, idPresbyter } = this.state
+		const user = {	name, email, address, age, birthday, phone, cellphone, isPresbyter, isLeader, idLeader, idPresbyter }
+
 		this.service.save(user)
 			.then(response => {
 				messages.mensagemSucesso('Usuário cadastrado com sucesso')
@@ -148,8 +143,8 @@ class RegisterUser extends React.Component {
 			return false;
 		}
 
-		const {	id, name, email, address, age, birthdayConverted, phone, cellphone, isPresbyter, isLeader, idLeader, idPresbyter } = this.state
-		const user = {	id, name, email, address, age, birthdayConverted, phone, cellphone, isPresbyter, isLeader, idLeader, idPresbyter }					
+		const {	id, name, email, address, age, birthday, phone, cellphone, isPresbyter, isLeader, idLeader, idPresbyter } = this.state
+		const user = {	id, name, email, address, age, birthday, phone, cellphone, isPresbyter, isLeader, idLeader, idPresbyter }			
 		this.service
 				.updateUser(user)
 				.then(response => {
@@ -223,7 +218,7 @@ class RegisterUser extends React.Component {
 												<div className="col-lg-3">													
 													<FormGroup  label="Data Nasc.:" htmlFor="dateMask">
 														<InputMask id="dateMask" value={this.state.birthday} mask="99/99/9999" placeholder="__/__/____" onChange={e => 
-															this.setState({birthday: e.target.value, birthdayConverted: e.target.value.split("/").reverse().join("-")})
+															this.setState({birthday: e.target.value})
 														} className="form-control" />		
                                 					</FormGroup>												
 												</div>				

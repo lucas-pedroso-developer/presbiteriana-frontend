@@ -37,11 +37,9 @@ class RegisterVisit extends React.Component {
 		if(params.id) {			
 			this.service
 				.getVisitById(params.id)
-				.then(response => {	
-					console.log('aqui ta o response do didmount')				
+				.then(response => {								
 					this.setState({...response.data, updating: true})					
-				}).catch(error => {
-					console.log('erro do didmount')				
+				}).catch(error => {						
 					messages.mensagemErro(error.response.data)
 				})
 		}
@@ -57,16 +55,15 @@ class RegisterVisit extends React.Component {
 			return false;
 		}
 
-		const {	idPresbyter, idLeader, visitDateConverted, leaderName, presbyterName } = this.state
-		const visit = { idPresbyter, idLeader, visitDateConverted, leaderName, presbyterName }
+		const {	idPresbyter, idLeader, visitDate, leaderName, presbyterName } = this.state
+		const visit = { idPresbyter, idLeader, visitDate, leaderName, presbyterName }
 						
 		this.service.save(visit)
 			.then(response => {
 				messages.mensagemSucesso('Visita inserida com sucesso')
 				this.props.history.push('/register-visit')
 			}).catch(error => {
-				messages.mensagemErro(error.response)
-				console.log(error.response)
+				messages.mensagemErro(error.response)				
 			})
 	}
 	
@@ -88,9 +85,7 @@ class RegisterVisit extends React.Component {
                     })                                        
                     if(list.length < 1) {
                         messages.mensagemAlert("Nenhum resultado encontrado.")
-					}
-					console.log('leaders list')                    
-					console.log(this.state.leaders)            
+					}					      
                 }).catch(error => {
 
                 })        
@@ -129,8 +124,8 @@ class RegisterVisit extends React.Component {
 			return false;
 		}
 
-		const {	id, idLeader, idPresbyter, visitDateConverted, leaderName, presbyterName } = this.state
-		const visit = { id, idLeader, idPresbyter, visitDateConverted, leaderName, presbyterName }
+		const {	id, idLeader, idPresbyter, visitDate, leaderName, presbyterName } = this.state
+		const visit = { id, idLeader, idPresbyter, visitDate, leaderName, presbyterName }
 		
 		this.service
 				.updateVisit(visit)
@@ -207,7 +202,7 @@ class RegisterVisit extends React.Component {
 												<div className="col-lg-3" style={ {position : 'relative', left: '0px'} }>
 													<FormGroup  label="Data Visita:" htmlFor="dateMask">
 														<InputMask id="dateMask" value={this.state.visitDate} mask="99/99/9999" placeholder="__/__/____" onChange={e => 
-															this.setState({visitDate: e.target.value, visitDateConverted: e.target.value.split("/").reverse().join("-")})
+															this.setState({visitDate: e.target.value})
 														} className="form-control" />
 													</FormGroup>	
 												</div> 																

@@ -18,8 +18,7 @@ class SearchUser extends React.Component {
 		email: '',
 		address: '',
 		age: '',
-		birthday: '',
-		birthdayConverted: '',
+		birthday: '',		
 		isPresbyter: '',
 		isLeader: '',
 		idLeader: '',	
@@ -42,20 +41,19 @@ class SearchUser extends React.Component {
 		this.getPresbyters();
 	}
 
-	search = () => {	
-		console.log('search')	
+	search = () => {			
 		const userFilter = {			
 			name: this.state.name,
 			email: this.state.email,
 			address: this.state.address,
 			age: this.state.age,
-			birthday: this.state.birthdayConverted,
+			birthday: this.state.birthday,
 			isPresbyter: this.state.isPresbyter,
 			isLeader: this.state.isLeader,
 			idLeader: this.state.idLeader,
 			idPresbyter: this.state.idPresbyter
 		}
-		
+				
 		this.service
 				.consult(userFilter)
 				.then(response => {
@@ -164,8 +162,7 @@ class SearchUser extends React.Component {
 			nobodyChecked: !initialState.nobodyChecked,
 		}));
 
-		const nobody = !this.state.nobodyChecked;		
-		console.log(nobody)
+		const nobody = !this.state.nobodyChecked;				
 		if(nobody) {
 			this.setState({
 				isLeader: false,	
@@ -271,7 +268,7 @@ class SearchUser extends React.Component {
 							<div className="col-lg-3">													
 								<FormGroup  label="Data Nasc.:" htmlFor="dateMask">
 									<InputMask id="dateMask" value={this.state.birthday} mask="99/99/9999" defaultValue="" placeholder="__/__/____" onChange={e => 
-										this.setState({birthday: e.target.value, birthdayConverted: e.target.value.split("/").reverse().join("-")})
+										this.setState({birthday: e.target.value})
 									} className="form-control" />		
 								</FormGroup>												
 							</div>
@@ -380,7 +377,7 @@ class SearchUser extends React.Component {
 									<button onClick={() => this.exportPDF() } 
 											type="button" 
 											className="btn btn-secondary">
-											<i class="pi pi-file-pdf"></i>Gerar Relatório
+											<i className="pi pi-file-pdf"></i>Gerar Relatório
 									</button>
 									
 								</div>		
